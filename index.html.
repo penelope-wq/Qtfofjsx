@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectador de IP</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .ip-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e7f3ff;
+            border-radius: 8px;
+            font-size: 1.2em;
+        }
+        #ip-address {
+            font-weight: bold;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detectador de Dirección IP</h1>
+        <p>Esta página puede mostrar tu dirección IP pública.</p>
+        <div class="ip-box">
+            Tu dirección IP es: <span id="ip-address">Cargando...</span>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address').innerText = data.ip;
+                })
+                .catch(error => {
+                    document.getElementById('ip-address').innerText = 'No se pudo obtener la IP';
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
